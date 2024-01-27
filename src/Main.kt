@@ -1,4 +1,20 @@
 import kotlin.math.roundToInt
+/**
+ * Clase que representa una persona con propiedades como peso, altura y nombre.
+ *
+ * @property peso El peso de la persona.
+ * @property altura La altura de la persona.
+ * @property nombre El nombre de la persona.
+ *
+ * @constructor Crea un objeto [Persona] con el peso y la altura especificados.
+ * @param peso El peso de la persona.
+ * @param altura La altura de la persona.
+ *
+ * @constructor Crea un objeto [Persona] con el peso, la altura y el nombre especificados.
+ * @param peso El peso de la persona.
+ * @param altura La altura de la persona.
+ * @param nombre El nombre de la persona.
+ */
 
 class Persona(
     val peso:Double,
@@ -12,11 +28,18 @@ class Persona(
 
     private var imc = peso / (altura*2)
 
+    /**
+     * Constructor secundario que permite proporcionar también el nombre al crear una persona.
+     */
     constructor(peso: Double,altura: Double,nombre:String):this(peso,altura){
         this.nombre = nombre
     }
 
-
+    /**
+     * Representación en cadena del objeto [Persona].
+     *
+     * @return Una cadena que representa el peso, la altura, el IMC y el nombre de la persona.
+     */
     override fun toString(): String {
         return """Persona: 
         peso: $peso
@@ -25,6 +48,11 @@ class Persona(
         nombre: $nombre"""
     }
 
+    /**
+     * Compara si dos objetos [Persona] son iguales.
+     *
+     * @return `true` si los objetos son iguales, `false` en caso contrario.
+     */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Persona) return false
@@ -35,32 +63,67 @@ class Persona(
         return false
     }
 
+    /**
+     * Saluda a la persona.
+     *
+     * @return Un saludo personalizado.
+     */
     fun saludar():String{
         return "Hola, soy ${this.nombre}"
     }
 
+    /**
+     * Verifica si la altura de la persona está por encima de la media.
+     *
+     * @return `true` si la altura es por encima de la media, `false` en caso contrario.
+     */
     private fun alturaEncimaMedia():Boolean {
         return if (this.altura >= 1.75 ) true else false
     }
 
+    /**
+     * Comprueba si la altura está por encima o por debajo de la media.
+     *
+     * @param tal Booleano que indica si la altura está por encima de la media.
+     * @return Una cadena indicando si la altura está por encima o por debajo de la media.
+     */
     private fun comprobaraltura(tal:Boolean):String{
         return if(tal) "Por encima de la media" else "Por debajo de la media"
     }
 
+    /**
+     * Verifica si el peso de la persona está por encima de la media.
+     *
+     * @return `true` si el peso es por encima de la media, `false` en caso contrario.
+     */
     private fun PesoEncimaMedia():Boolean {
         return if (this.peso >= 70.0 ) true else false
     }
 
+    /**
+     * Comprueba si el peso está por encima o por debajo de la media.
+     *
+     * @param tal Booleano que indica si el peso está por encima de la media.
+     * @return Una cadena indicando si el peso está por encima o por debajo de la media.
+     */
     private fun comprobarpeso(tal:Boolean):String{
         return if(tal) "Por encima de la media" else "Por debajo de la media"
     }
 
-
+    /**
+     * Obtiene una descripción detallada de la persona, incluyendo información sobre altura, peso, IMC y clasificación del IMC.
+     *
+     * @return Una cadena con la descripción detallada de la persona.
+     */
     fun obtenerDesc():String {
         return "$nombre con una altura de ${altura}m (${comprobaraltura(alturaEncimaMedia())}) y un peso ${peso}kg (${comprobarpeso(PesoEncimaMedia())}) tiene un IMC de ${String.format("%.2f",this.imc)} (${obtenerDescImc()})."
     }
 
-
+    /**
+     * Obtiene la descripción de la clasificación del IMC.
+     *
+     * @return Una cadena con la clasificación del IMC.
+     */
     private fun obtenerDescImc():String{
         return when (this.imc) {
             in 1.0..18.5 -> "peso insuficiente"
@@ -80,6 +143,9 @@ class Persona(
 
 }
 
+/**
+ * Función principal que crea varios objetos [Persona] y los imprime.
+ */
 fun main() {
     val persona1 = Persona(69.2,1.72,"Jose angel")
     println(persona1.saludar())
