@@ -10,7 +10,7 @@ class Persona(
             field = value
         }
 
-    var imc = peso / (altura*2)
+    private var imc = peso / (altura*2)
 
     constructor(peso: Double,altura: Double,nombre:String):this(peso,altura){
         this.nombre = nombre
